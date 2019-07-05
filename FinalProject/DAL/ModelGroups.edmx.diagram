@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="accf465267ee49258424c7f9834ed04a" Name="Diagram1">
+        <EntityTypeShape EntityType="project_group_tami_and_giliModel.bank" Width="1.5" PointX="3" PointY="13.75" />
+        <EntityTypeShape EntityType="project_group_tami_and_giliModel.bank_details" Width="1.5" PointX="5.25" PointY="8" />
+        <EntityTypeShape EntityType="project_group_tami_and_giliModel.branch" Width="1.5" PointX="3" PointY="10.875" />
+        <EntityTypeShape EntityType="project_group_tami_and_giliModel.category" Width="1.5" PointX="0.75" PointY="2.375" />
+        <EntityTypeShape EntityType="project_group_tami_and_giliModel.group_members" Width="1.5" PointX="5.25" PointY="2.375" />
+        <EntityTypeShape EntityType="project_group_tami_and_giliModel.group" Width="1.5" PointX="3" PointY="1.375" />
+        <EntityTypeShape EntityType="project_group_tami_and_giliModel.picture" Width="1.5" PointX="5.25" PointY="5.125" />
+        <EntityTypeShape EntityType="project_group_tami_and_giliModel.sysdiagram" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="project_group_tami_and_giliModel.user" Width="1.5" PointX="3" PointY="6.875" />
+        <AssociationConnector Association="project_group_tami_and_giliModel.FK__bank_deta__bank___534D60F1" />
+        <AssociationConnector Association="project_group_tami_and_giliModel.FK__branches__bank_i__45F365D3" />
+        <AssociationConnector Association="project_group_tami_and_giliModel.FK__bank_deta__branc__5441852A" />
+        <AssociationConnector Association="project_group_tami_and_giliModel.FK__bank_deta__user___52593CB8" />
+        <AssociationConnector Association="project_group_tami_and_giliModel.FK__groups__category__5BE2A6F2" />
+        <AssociationConnector Association="project_group_tami_and_giliModel.FK__group_mem___user__0F975522" />
+        <AssociationConnector Association="project_group_tami_and_giliModel.FK__group_mem__group__0EA330E9" />
+        <AssociationConnector Association="project_group_tami_and_giliModel.FK__pictures__group___31EC6D26" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

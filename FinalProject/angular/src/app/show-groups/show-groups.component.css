@@ -1,0 +1,12 @@
+.mat-card{
+    display: inline-block;
+}
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+  .mat-card-image{
+width:200px; 
+height:200px;
+  }

@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="project_group_tami_and_giliModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="project_group_tami_and_giliEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="banks" EntityType="project_group_tami_and_giliModel.bank" />
+    <EntitySet Name="bank_details" EntityType="project_group_tami_and_giliModel.bank_details" />
+    <EntitySet Name="branches" EntityType="project_group_tami_and_giliModel.branch" />
+    <EntitySet Name="categories" EntityType="project_group_tami_and_giliModel.category" />
+    <EntitySet Name="group_members" EntityType="project_group_tami_and_giliModel.group_members" />
+    <EntitySet Name="groups" EntityType="project_group_tami_and_giliModel.group" />
+    <EntitySet Name="pictures" EntityType="project_group_tami_and_giliModel.picture" />
+    <EntitySet Name="sysdiagrams" EntityType="project_group_tami_and_giliModel.sysdiagram" />
+    <EntitySet Name="users" EntityType="project_group_tami_and_giliModel.user" />
+    <AssociationSet Name="FK__bank_deta__bank___534D60F1" Association="project_group_tami_and_giliModel.FK__bank_deta__bank___534D60F1">
+      <End Role="bank" EntitySet="banks" />
+      <End Role="bank_details" EntitySet="bank_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__branches__bank_i__45F365D3" Association="project_group_tami_and_giliModel.FK__branches__bank_i__45F365D3">
+      <End Role="bank" EntitySet="banks" />
+      <End Role="branch" EntitySet="branches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bank_deta__branc__5441852A" Association="project_group_tami_and_giliModel.FK__bank_deta__branc__5441852A">
+      <End Role="branch" EntitySet="branches" />
+      <End Role="bank_details" EntitySet="bank_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bank_deta__user___52593CB8" Association="project_group_tami_and_giliModel.FK__bank_deta__user___52593CB8">
+      <End Role="user" EntitySet="users" />
+      <End Role="bank_details" EntitySet="bank_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__groups__category__5BE2A6F2" Association="project_group_tami_and_giliModel.FK__groups__category__5BE2A6F2">
+      <End Role="category" EntitySet="categories" />
+      <End Role="group" EntitySet="groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK__group_mem___user__0F975522" Association="project_group_tami_and_giliModel.FK__group_mem___user__0F975522">
+      <End Role="user" EntitySet="users" />
+      <End Role="group_members" EntitySet="group_members" />
+    </AssociationSet>
+    <AssociationSet Name="FK__group_mem__group__0EA330E9" Association="project_group_tami_and_giliModel.FK__group_mem__group__0EA330E9">
+      <End Role="group" EntitySet="groups" />
+      <End Role="group_members" EntitySet="group_members" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pictures__group___31EC6D26" Association="project_group_tami_and_giliModel.FK__pictures__group___31EC6D26">
+      <End Role="group" EntitySet="groups" />
+      <End Role="picture" EntitySet="pictures" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="bank">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="numBank" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="name_bank" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="bank_details" Relationship="project_group_tami_and_giliModel.FK__bank_deta__bank___534D60F1" FromRole="bank" ToRole="bank_details" />
+    <NavigationProperty Name="branches" Relationship="project_group_tami_and_giliModel.FK__branches__bank_i__45F365D3" FromRole="bank" ToRole="branch" />
+  </EntityType>
+  <EntityType Name="bank_details">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_id_" Type="Int32" Nullable="false" />
+    <Property Name="accountNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="bank_id_" Type="Int32" Nullable="false" />
+    <Property Name="branch_id_" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="bank" Relationship="project_group_tami_and_giliModel.FK__bank_deta__bank___534D60F1" FromRole="bank_details" ToRole="bank" />
+    <NavigationProperty Name="branch" Relationship="project_group_tami_and_giliModel.FK__bank_deta__branc__5441852A" FromRole="bank_details" ToRole="branch" />
+    <NavigationProperty Name="user" Relationship="project_group_tami_and_giliModel.FK__bank_deta__user___52593CB8" FromRole="bank_details" ToRole="user" />
+  </EntityType>
+  <EntityType Name="branch">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="bank_id" Type="Int32" Nullable="false" />
+    <Property Name="name_branche" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="bank" Relationship="project_group_tami_and_giliModel.FK__branches__bank_i__45F365D3" FromRole="branch" ToRole="bank" />
+    <NavigationProperty Name="bank_details" Relationship="project_group_tami_and_giliModel.FK__bank_deta__branc__5441852A" FromRole="branch" ToRole="bank_details" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="category_picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="groups" Relationship="project_group_tami_and_giliModel.FK__groups__category__5BE2A6F2" FromRole="category" ToRole="group" />
+  </EntityType>
+  <EntityType Name="group_members">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="group_id" Type="Int32" Nullable="false" />
+    <Property Name="C_user_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="user" Relationship="project_group_tami_and_giliModel.FK__group_mem___user__0F975522" FromRole="group_members" ToRole="user" />
+    <NavigationProperty Name="group" Relationship="project_group_tami_and_giliModel.FK__group_mem__group__0EA330E9" FromRole="group_members" ToRole="group" />
+  </EntityType>
+  <EntityType Name="group">
+    <Key>
+      <PropertyRef Name="group_id" />
+    </Key>
+    <Property Name="group_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="group_name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="group_manager_id" Type="Int32" Nullable="false" />
+    <Property Name="price_perPerson" Type="Int32" Nullable="false" />
+    <Property Name="price_perGroup" Type="Int32" Nullable="false" />
+    <Property Name="dateEvent" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Last_Date_Registration" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="address_event" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="is_active" Type="Boolean" Nullable="false" />
+    <Property Name="describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="num_Participants" Type="Int32" />
+    <Property Name="category_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="category" Relationship="project_group_tami_and_giliModel.FK__groups__category__5BE2A6F2" FromRole="group" ToRole="category" />
+    <NavigationProperty Name="group_members" Relationship="project_group_tami_and_giliModel.FK__group_mem__group__0EA330E9" FromRole="group" ToRole="group_members" />
+    <NavigationProperty Name="pictures" Relationship="project_group_tami_and_giliModel.FK__pictures__group___31EC6D26" FromRole="group" ToRole="picture" />
+  </EntityType>
+  <EntityType Name="picture">
+    <Key>
+      <PropertyRef Name="picture_id" />
+    </Key>
+    <Property Name="picture_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="group_id" Type="Int32" Nullable="false" />
+    <Property Name="path_picture" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="group" Relationship="project_group_tami_and_giliModel.FK__pictures__group___31EC6D26" FromRole="picture" ToRole="group" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="user_password" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="user_mail" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="user_phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="user_city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="user_address" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="user_tz" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="bank_details" Relationship="project_group_tami_and_giliModel.FK__bank_deta__user___52593CB8" FromRole="user" ToRole="bank_details" />
+    <NavigationProperty Name="group_members" Relationship="project_group_tami_and_giliModel.FK__group_mem___user__0F975522" FromRole="user" ToRole="group_members" />
+  </EntityType>
+  <Association Name="FK__bank_deta__bank___534D60F1">
+    <End Type="project_group_tami_and_giliModel.bank" Role="bank" Multiplicity="1" />
+    <End Type="project_group_tami_and_giliModel.bank_details" Role="bank_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bank">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bank_details">
+        <PropertyRef Name="bank_id_" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__branches__bank_i__45F365D3">
+    <End Type="project_group_tami_and_giliModel.bank" Role="bank" Multiplicity="1" />
+    <End Type="project_group_tami_and_giliModel.branch" Role="branch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bank">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="branch">
+        <PropertyRef Name="bank_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bank_deta__branc__5441852A">
+    <End Type="project_group_tami_and_giliModel.branch" Role="branch" Multiplicity="1" />
+    <End Type="project_group_tami_and_giliModel.bank_details" Role="bank_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="branch">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bank_details">
+        <PropertyRef Name="branch_id_" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bank_deta__user___52593CB8">
+    <End Type="project_group_tami_and_giliModel.user" Role="user" Multiplicity="1" />
+    <End Type="project_group_tami_and_giliModel.bank_details" Role="bank_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="bank_details">
+        <PropertyRef Name="user_id_" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__groups__category__5BE2A6F2">
+    <End Type="project_group_tami_and_giliModel.category" Role="category" Multiplicity="1" />
+    <End Type="project_group_tami_and_giliModel.group" Role="group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="category">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="group">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__group_mem___user__0F975522">
+    <End Type="project_group_tami_and_giliModel.user" Role="user" Multiplicity="1" />
+    <End Type="project_group_tami_and_giliModel.group_members" Role="group_members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="user">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="group_members">
+        <PropertyRef Name="C_user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__group_mem__group__0EA330E9">
+    <End Type="project_group_tami_and_giliModel.group" Role="group" Multiplicity="1" />
+    <End Type="project_group_tami_and_giliModel.group_members" Role="group_members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="group">
+        <PropertyRef Name="group_id" />
+      </Principal>
+      <Dependent Role="group_members">
+        <PropertyRef Name="group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pictures__group___31EC6D26">
+    <End Type="project_group_tami_and_giliModel.group" Role="group" Multiplicity="1" />
+    <End Type="project_group_tami_and_giliModel.picture" Role="picture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="group">
+        <PropertyRef Name="group_id" />
+      </Principal>
+      <Dependent Role="picture">
+        <PropertyRef Name="group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

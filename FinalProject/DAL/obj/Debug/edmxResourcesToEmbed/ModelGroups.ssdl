@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="project_group_tami_and_giliModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="bank">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="numBank" Type="varchar" MaxLength="10" />
+    <Property Name="name_bank" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bank_details">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id_" Type="int" Nullable="false" />
+    <Property Name="accountNum" Type="varchar" MaxLength="50" />
+    <Property Name="bank_id_" Type="int" Nullable="false" />
+    <Property Name="branch_id_" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="branches">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="bank_id" Type="int" Nullable="false" />
+    <Property Name="name_branche" Type="nvarchar" MaxLength="50" />
+    <Property Name="adress" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="categories">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="category_picture" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="group_members">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="group_id" Type="int" Nullable="false" />
+    <Property Name="[user_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="groups">
+    <Key>
+      <PropertyRef Name="group_id" />
+    </Key>
+    <Property Name="group_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="group_name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="group_manager_id" Type="int" Nullable="false" />
+    <Property Name="price_perPerson" Type="int" Nullable="false" />
+    <Property Name="price_perGroup" Type="int" Nullable="false" />
+    <Property Name="dateEvent" Type="datetime" Nullable="false" />
+    <Property Name="Last_Date_Registration" Type="datetime" Nullable="false" />
+    <Property Name="address_event" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+    <Property Name="describe" Type="nvarchar(max)" />
+    <Property Name="num_Participants" Type="int" />
+    <Property Name="category_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pictures">
+    <Key>
+      <PropertyRef Name="picture_id" />
+    </Key>
+    <Property Name="picture_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="group_id" Type="int" Nullable="false" />
+    <Property Name="path_picture" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="user_password" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="user_mail" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="user_phone" Type="nvarchar" MaxLength="10" />
+    <Property Name="user_city" Type="nvarchar" MaxLength="10" />
+    <Property Name="user_address" Type="nvarchar" MaxLength="15" />
+    <Property Name="user_tz" Type="nvarchar" MaxLength="9" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__bank_deta__bank___534D60F1">
+    <End Role="bank" Type="Self.bank" Multiplicity="1" />
+    <End Role="bank_details" Type="Self.bank_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bank">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bank_details">
+        <PropertyRef Name="bank_id_" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bank_deta__branc__5441852A">
+    <End Role="branches" Type="Self.branches" Multiplicity="1" />
+    <End Role="bank_details" Type="Self.bank_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="branches">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="bank_details">
+        <PropertyRef Name="branch_id_" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__bank_deta__user___52593CB8">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="bank_details" Type="Self.bank_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="bank_details">
+        <PropertyRef Name="user_id_" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__branches__bank_i__45F365D3">
+    <End Role="bank" Type="Self.bank" Multiplicity="1" />
+    <End Role="branches" Type="Self.branches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="bank">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="branches">
+        <PropertyRef Name="bank_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__group_mem__[user__0F975522">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="group_members" Type="Self.group_members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="group_members">
+        <PropertyRef Name="[user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__group_mem__group__0EA330E9">
+    <End Role="groups" Type="Self.groups" Multiplicity="1" />
+    <End Role="group_members" Type="Self.group_members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="groups">
+        <PropertyRef Name="group_id" />
+      </Principal>
+      <Dependent Role="group_members">
+        <PropertyRef Name="group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__groups__category__5BE2A6F2">
+    <End Role="categories" Type="Self.categories" Multiplicity="1" />
+    <End Role="groups" Type="Self.groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="groups">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__pictures__group___31EC6D26">
+    <End Role="groups" Type="Self.groups" Multiplicity="1" />
+    <End Role="pictures" Type="Self.pictures" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="groups">
+        <PropertyRef Name="group_id" />
+      </Principal>
+      <Dependent Role="pictures">
+        <PropertyRef Name="group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="project_group_tami_and_giliModelStoreContainer">
+    <EntitySet Name="bank" EntityType="Self.bank" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="bank_details" EntityType="Self.bank_details" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="branches" EntityType="Self.branches" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="group_members" EntityType="Self.group_members" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="groups" EntityType="Self.groups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pictures" EntityType="Self.pictures" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__bank_deta__bank___534D60F1" Association="Self.FK__bank_deta__bank___534D60F1">
+      <End Role="bank" EntitySet="bank" />
+      <End Role="bank_details" EntitySet="bank_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bank_deta__branc__5441852A" Association="Self.FK__bank_deta__branc__5441852A">
+      <End Role="branches" EntitySet="branches" />
+      <End Role="bank_details" EntitySet="bank_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__bank_deta__user___52593CB8" Association="Self.FK__bank_deta__user___52593CB8">
+      <End Role="users" EntitySet="users" />
+      <End Role="bank_details" EntitySet="bank_details" />
+    </AssociationSet>
+    <AssociationSet Name="FK__branches__bank_i__45F365D3" Association="Self.FK__branches__bank_i__45F365D3">
+      <End Role="bank" EntitySet="bank" />
+      <End Role="branches" EntitySet="branches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__group_mem__[user__0F975522" Association="Self.FK__group_mem__[user__0F975522">
+      <End Role="users" EntitySet="users" />
+      <End Role="group_members" EntitySet="group_members" />
+    </AssociationSet>
+    <AssociationSet Name="FK__group_mem__group__0EA330E9" Association="Self.FK__group_mem__group__0EA330E9">
+      <End Role="groups" EntitySet="groups" />
+      <End Role="group_members" EntitySet="group_members" />
+    </AssociationSet>
+    <AssociationSet Name="FK__groups__category__5BE2A6F2" Association="Self.FK__groups__category__5BE2A6F2">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="groups" EntitySet="groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK__pictures__group___31EC6D26" Association="Self.FK__pictures__group___31EC6D26">
+      <End Role="groups" EntitySet="groups" />
+      <End Role="pictures" EntitySet="pictures" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

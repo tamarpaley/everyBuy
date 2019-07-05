@@ -1,0 +1,39 @@
+
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{data.groupDetails.group_name}}</mat-card-title>
+        <mat-card-subtitle>{{data.groupDetails.dateEvent}}</mat-card-subtitle>
+      </mat-card-header>
+      <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+      <mat-card-content>
+        <div>
+            <mat-card-title>Describe</mat-card-title>
+            <p>{{data.groupDetails.describe}}</p>
+        </div>
+        <div>
+            <mat-card-title>Price per person</mat-card-title>
+            <p>{{data.groupDetails.price_perPerson}}</p>
+        </div>
+        <div>
+            <mat-card-title>Price per group</mat-card-title>
+            <p>{{data.groupDetails.price_perGroup}}</p>
+        </div>
+        <div>
+            <mat-card-title>Last date to regist</mat-card-title>
+            <p>{{data.groupDetails.Last_Date_Registration}}</p>
+        </div>
+        <div>
+            <mat-card-title>Adress event</mat-card-title>
+            <p>{{data.groupDetails.address_event}}</p>
+        </div>
+        <div>
+            <mat-card-title>Num participant</mat-card-title>
+            <p>{{data.groupDetails.num_Participants}}</p>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>To join</button>
+       
+      </mat-card-actions>
+    </mat-card>

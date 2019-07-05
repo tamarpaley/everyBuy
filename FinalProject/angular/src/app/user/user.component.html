@@ -1,0 +1,77 @@
+<p>
+  user works!
+</p>
+<div class="example-container">
+  <!-- <form #myRegisretForm="NgForm" (submit)="Register()">  -->
+  <form class="example-form">
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Your Name" #name name="user_name" [(ngModel)]="user.user_name">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Your TZ" name="user_tz" #tz [(ngModel)]="user.user_tz">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <input name="user_password" matInput placeholder="Enter your password" [type]="hide ? 'text' : 'password'"
+          #email [(ngModel)]="user.user_password">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+       
+        <input type="email" name="ffff" matInput placeholder="Email" email="true" [formControl]="emailValidator"  [(ngModel)]="user.user_mail">
+       
+        <mat-error *ngIf="emailValidator.hasError('email') && !emailValidator.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="emailValidator.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Phone" type="phone" name="user_phone" required #phone
+          [(ngModel)]="user.user_phone">
+      </mat-form-field>
+    </div>
+     <div>
+    
+     <mat-form-field>
+        <mat-label>Address << using the directive >></mat-label>
+        <input matInput
+             matGoogleMapsAutocomplete
+             [country]="il"
+            name="user_adress" [(ngModel)]="user.user_address"
+             > 
+       </mat-form-field> 
+
+    </div>   
+    <!-- <input type="submit"> -->
+
+    <div>
+      <button mat-button (click)="Register()">הרשם</button>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+<!-- public int user_id { get; set; }
+public string user_name { get; set; }
+public string user_password { get; set; }
+public string user_mail { get; set; }
+public string user_phone { get; set; }
+public string user_city { get; set; }
+public string user_address { get; set; }
+public string user_tz { get; set; } -->

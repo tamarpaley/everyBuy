@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="project_group_tami_and_giliModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="categories">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="category_picture" Type="image" />
+  </EntityType>
+  <EntityType Name="group_members">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="group_id" Type="int" Nullable="false" />
+    <Property Name="[user_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="groups">
+    <Key>
+      <PropertyRef Name="group_id" />
+    </Key>
+    <Property Name="group_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category_id" Type="int" Nullable="false" />
+    <Property Name="group_name" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="group_manager_id" Type="int" Nullable="false" />
+    <Property Name="price_perPerson" Type="int" Nullable="false" />
+    <Property Name="price_perGroup" Type="int" Nullable="false" />
+    <Property Name="dateEvent" Type="datetime" Nullable="false" />
+    <Property Name="Last_Date_Registration" Type="datetime" Nullable="false" />
+    <Property Name="address_event" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="is_active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_name" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="user_password" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="user_mail" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="user_phone" Type="nvarchar" MaxLength="10" />
+    <Property Name="user_city" Type="nvarchar" MaxLength="10" />
+    <Property Name="user_address" Type="nvarchar" MaxLength="15" />
+    <Property Name="user_tz" Type="nvarchar" MaxLength="9" Nullable="false" />
+    <Property Name="user_image" Type="image" />
+  </EntityType>
+  <Association Name="FK__group_mem__[user__0F975522">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="group_members" Type="Self.group_members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="group_members">
+        <PropertyRef Name="[user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__group_mem__group__0EA330E9">
+    <End Role="groups" Type="Self.groups" Multiplicity="1" />
+    <End Role="group_members" Type="Self.group_members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="groups">
+        <PropertyRef Name="group_id" />
+      </Principal>
+      <Dependent Role="group_members">
+        <PropertyRef Name="group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__groups__category__08EA5793">
+    <End Role="categories" Type="Self.categories" Multiplicity="1" />
+    <End Role="groups" Type="Self.groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="groups">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__groups__group_ma__09DE7BCC">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="groups" Type="Self.groups" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="groups">
+        <PropertyRef Name="group_manager_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="project_group_tami_and_giliModelStoreContainer">
+    <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="group_members" EntityType="Self.group_members" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="groups" EntityType="Self.groups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__group_mem__[user__0F975522" Association="Self.FK__group_mem__[user__0F975522">
+      <End Role="users" EntitySet="users" />
+      <End Role="group_members" EntitySet="group_members" />
+    </AssociationSet>
+    <AssociationSet Name="FK__group_mem__group__0EA330E9" Association="Self.FK__group_mem__group__0EA330E9">
+      <End Role="groups" EntitySet="groups" />
+      <End Role="group_members" EntitySet="group_members" />
+    </AssociationSet>
+    <AssociationSet Name="FK__groups__category__08EA5793" Association="Self.FK__groups__category__08EA5793">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="groups" EntitySet="groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK__groups__group_ma__09DE7BCC" Association="Self.FK__groups__group_ma__09DE7BCC">
+      <End Role="users" EntitySet="users" />
+      <End Role="groups" EntitySet="groups" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

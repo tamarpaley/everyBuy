@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="project_group_tami_and_giliModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="category_picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="groups" Relationship="Self.FK__groups__category__08EA5793" FromRole="categories" ToRole="groups" />
+  </EntityType>
+  <EntityType Name="group_members">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="group_id" Type="Int32" Nullable="false" />
+    <Property Name="C_user_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="user" Relationship="Self.FK__group_mem___user__0F975522" FromRole="group_members" ToRole="users" />
+    <NavigationProperty Name="group" Relationship="Self.FK__group_mem__group__0EA330E9" FromRole="group_members" ToRole="groups" />
+  </EntityType>
+  <EntityType Name="group">
+    <Key>
+      <PropertyRef Name="group_id" />
+    </Key>
+    <Property Name="group_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="category_id" Type="Int32" Nullable="false" />
+    <Property Name="group_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="group_manager_id" Type="Int32" Nullable="false" />
+    <Property Name="price_perPerson" Type="Int32" Nullable="false" />
+    <Property Name="price_perGroup" Type="Int32" Nullable="false" />
+    <Property Name="dateEvent" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Last_Date_Registration" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="address_event" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="is_active" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="category" Relationship="Self.FK__groups__category__08EA5793" FromRole="groups" ToRole="categories" />
+    <NavigationProperty Name="group_members" Relationship="Self.FK__group_mem__group__0EA330E9" FromRole="groups" ToRole="group_members" />
+    <NavigationProperty Name="user" Relationship="Self.FK__groups__group_ma__09DE7BCC" FromRole="groups" ToRole="users" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="user_id" />
+    </Key>
+    <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="user_password" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="user_mail" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="user_phone" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="user_city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="user_address" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="user_tz" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="user_image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="group_members" Relationship="Self.FK__group_mem___user__0F975522" FromRole="users" ToRole="group_members" />
+    <NavigationProperty Name="groups" Relationship="Self.FK__groups__group_ma__09DE7BCC" FromRole="users" ToRole="groups" />
+  </EntityType>
+  <Association Name="FK__groups__category__08EA5793">
+    <End Role="categories" Type="Self.category" Multiplicity="1" />
+    <End Role="groups" Type="Self.group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="groups">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__group_mem___user__0F975522">
+    <End Role="users" Type="Self.user" Multiplicity="1" />
+    <End Role="group_members" Type="Self.group_members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="group_members">
+        <PropertyRef Name="C_user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__group_mem__group__0EA330E9">
+    <End Role="groups" Type="Self.group" Multiplicity="1" />
+    <End Role="group_members" Type="Self.group_members" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="groups">
+        <PropertyRef Name="group_id" />
+      </Principal>
+      <Dependent Role="group_members">
+        <PropertyRef Name="group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__groups__group_ma__09DE7BCC">
+    <End Role="users" Type="Self.user" Multiplicity="1" />
+    <End Role="groups" Type="Self.group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_id" />
+      </Principal>
+      <Dependent Role="groups">
+        <PropertyRef Name="group_manager_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="project_group_tami_and_giliEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="group_members" EntityType="Self.group_members" />
+    <EntitySet Name="groups" EntityType="Self.group" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="users" EntityType="Self.user" />
+    <AssociationSet Name="FK__groups__category__08EA5793" Association="Self.FK__groups__category__08EA5793">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="groups" EntitySet="groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK__group_mem___user__0F975522" Association="Self.FK__group_mem___user__0F975522">
+      <End Role="users" EntitySet="users" />
+      <End Role="group_members" EntitySet="group_members" />
+    </AssociationSet>
+    <AssociationSet Name="FK__group_mem__group__0EA330E9" Association="Self.FK__group_mem__group__0EA330E9">
+      <End Role="groups" EntitySet="groups" />
+      <End Role="group_members" EntitySet="group_members" />
+    </AssociationSet>
+    <AssociationSet Name="FK__groups__group_ma__09DE7BCC" Association="Self.FK__groups__group_ma__09DE7BCC">
+      <End Role="users" EntitySet="users" />
+      <End Role="groups" EntitySet="groups" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
